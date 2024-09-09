@@ -1,7 +1,6 @@
 import { inquirer, validateCidr } from '../../lib/common.js';
 import { generateMainTF, generateVariablesTF, generateOutputsTF } from './generateSecurityGroupFiles.js';
 
-// Function to prompt user for security group details
 const promptSecurityGroup = async (vpcName) => {
   const securityGroupAnswers = await inquirer.prompt([
     {
@@ -46,13 +45,11 @@ const promptSecurityGroup = async (vpcName) => {
     },
   ]);
 
-  // Include the VPC name in the answers to pass to the Terraform files
   securityGroupAnswers.vpc_name = vpcName;
 
   return securityGroupAnswers;
 };
 
-// Function to generate Terraform files for the Security Group
 const generateSecurityGroupFiles = (securityGroupAnswers) => {
   generateMainTF(securityGroupAnswers);
   generateVariablesTF(securityGroupAnswers);
